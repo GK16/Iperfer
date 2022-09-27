@@ -40,9 +40,33 @@ public class Main {
             }
 
             Client client = new Client(args[2],portNum,time);
+            client.start();
         }
 
-        System.out.println("success!");
+        if(args[0].equals("-s")){
+            if (args.length != 3 || !args[1].equals("-p")){
+                System.err.println("Error: invalid arguments");
+                System.exit(0);
+            }
+
+            int portNum = 0;
+            try {
+                portNum = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e){
+                // port is not number
+                System.err.println("Error: invalid arguments");
+                System.err.println(e);
+                System.exit(0);
+            }
+            if(portNum < 1024 || portNum > 65535){
+                // port is out of range
+                System.err.println("Error: port number must be in the range 1024 to 65535");
+                System.exit(0);
+            }
+
+            Server server = new Server(portNum);
+            server.start();
+        }
 
     }
 }
