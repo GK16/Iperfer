@@ -7,10 +7,19 @@ public class Server {
     private int portNum;
 
     Server(){}
+    /**
+     * init the server
+     *
+     * @param portNum
+     */
     Server(int portNum){
         this.portNum = portNum;
     }
 
+
+    /**
+     * Start the server to listen. Close when the client close.
+     */
     public void start(){
         long byteRecieved = 0;
         long startTime = 0;
@@ -35,6 +44,7 @@ public class Server {
                 byteRecieved +=  bytesNum;
             }
             endTime = System.currentTimeMillis();
+
             // Close connection
             System.out.println("Server is shutting down.");
             socket.close();
@@ -44,6 +54,7 @@ public class Server {
             e.printStackTrace();
             System.exit(0);
         }
+        // calculate time spent and KbRevieved
         float time = (float) (endTime - startTime) / (float)1000;
         long KbRevieved = byteRecieved / 1000;
         System.out.printf("Server recieved = %d KB rate = %.3f Mbps%n", KbRevieved, (float) KbRevieved * 8 / (time*1000));

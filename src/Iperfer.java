@@ -3,29 +3,30 @@ public class Iperfer {
     public static void main(String[] args) {
         // preliminary parameter check
         if(args.length != 3 && args.length != 7) {
-            System.err.println("Error: invalid arguments1");
+            System.err.println("Error: invalid arguments");
             System.exit(0);
         }
         if(!args[0].equals("-c") && !args[0].equals("-s")) {
-            System.err.println("Error: invalid arguments2");
+            System.err.println("Error: invalid arguments");
             System.exit(0);
         }
 
         // Client Mode
         if(args[0].equals("-c")) {
             if (args.length != 7 || !args[1].equals("-h") || !args[3].equals("-p") || !args[5].equals("-t")){
-                System.err.println("Error: invalid arguments3");
+                System.err.println("Error: invalid arguments");
                 System.exit(0);
             }
 
             int portNum = 0;
             int time = 0;
+            //Parsing Command arguments
             try {
                 portNum = Integer.parseInt(args[4]);
                 time = Integer.parseInt(args[6]);
             } catch (NumberFormatException e){
                 // time or port is not number
-                System.err.println("Error: invalid arguments4");
+                System.err.println("Error: invalid arguments");
                 System.err.println(e);
                 System.exit(0);
             }
@@ -48,6 +49,7 @@ public class Iperfer {
 
             int portNum = 0;
             try {
+                //Parsing Command arguments
                 portNum = Integer.parseInt(args[2]);
             } catch (NumberFormatException e){
                 // port is not number
