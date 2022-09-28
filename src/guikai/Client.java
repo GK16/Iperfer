@@ -21,20 +21,19 @@ public class Client {
         try{
             // Create Socket
             Socket socket = new Socket (hostName, serverPort);
-            // Create writer
+            // Create outputStream
             OutputStream outputStream = socket.getOutputStream();
-            PrintWriter out = new PrintWriter (outputStream, true);
 
             // Write message
             byte[] dataChunk = new byte[1000];
             long startTime = System.currentTimeMillis();
             while (System.currentTimeMillis() - startTime < time * 1000){
-                out.println(dataChunk);
+                outputStream.write(dataChunk);
                 chunkNum++;
             }
 
             // Close connection
-            out.close();
+            outputStream.close();
             socket.close();
         } catch (Exception e){
             System.err.println("Failed to connect to server");

@@ -23,15 +23,17 @@ public class Server {
             // Listen for a connection
             System.out.printf("Server is listening at port %d now.\n", portNum);
             Socket socket = server.accept();
-            // Read message
+
+            // init counter
             int bytesNum = 0;
-            startTime = System.currentTimeMillis();
-            byte[] buffer = new byte[1000];
             byte[] bytes = new byte[1000];
+
+            // Read message
+            startTime = System.currentTimeMillis();
             while (bytesNum > -1) {
                 //the total number of bytes read into the buffer
                 // or -1 if there is no more data because the end of the stream has been reached.
-                bytesNum = socket.getInputStream().read(buffer,0,1000);
+                bytesNum = socket.getInputStream().read(bytes);
                 byteRecieved +=  bytesNum;
             }
             endTime = System.currentTimeMillis();
