@@ -1,11 +1,8 @@
 package guikai;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 
 public class Server {
@@ -24,19 +21,19 @@ public class Server {
         try{
             ServerSocket server = new ServerSocket(portNum);
             // Listen for a connection
-            System.out.printf("Server is listening at port %d now.", portNum);
+            System.out.printf("Server is listening at port %d now.\n", portNum);
             Socket socket = server.accept();
             // Read message
             int bytesNum = 0;
             startTime = System.currentTimeMillis();
+            byte[] buffer = new byte[1000];
+            byte[] bytes = new byte[1000];
             while (bytesNum > -1) {
-                byte[] bytes = new byte[1000];
                 //the total number of bytes read into the buffer
                 // or -1 if there is no more data because the end of the stream has been reached.
-                bytesNum = socket.getInputStream().read(bytes);
+                bytesNum = socket.getInputStream().read(buffer,0,1000);
                 byteRecieved +=  bytesNum;
             }
-
             endTime = System.currentTimeMillis();
             // Close connection
             System.out.println("Server is shutting down.");
