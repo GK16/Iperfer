@@ -41,7 +41,7 @@ public class Client {
             e.printStackTrace();
             System.exit(0);
         }
-        float rate = (float) chunkNum / time;
+        float rate = (float) chunkNum / (time * 1000);
         System.out.printf("sent=%d KB rate=%.3f Mbps\n", chunkNum, rate);
 
     }

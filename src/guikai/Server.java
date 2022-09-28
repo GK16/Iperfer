@@ -26,18 +26,19 @@ public class Server {
             // Listen for a connection
             System.out.printf("Server is listening at port %d now.", portNum);
             Socket socket = server.accept();
-            // Create BufferedReader
-            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             // Read message
+            int bytesNum = 0;
             startTime = System.currentTimeMillis();
-            String line = br.readLine();
-            while (line != null){
-                byteRecieved += line.getBytes(StandardCharsets.UTF_8).length;
-                line = br.readLine();
+            while (bytesNum > -1) {
+                byte[] bytes = new byte[1000];
+                //the total number of bytes read into the buffer
+                // or -1 if there is no more data because the end of the stream has been reached.
+                bytesNum = socket.getInputStream().read(bytes);
+                byteRecieved +=  bytesNum;
             }
+
             endTime = System.currentTimeMillis();
             // Close connection
-            br.close();
             System.out.println("Server is shutting down.");
             socket.close();
             server.close();
@@ -48,6 +49,6 @@ public class Server {
         }
         float time = (float) (endTime - startTime) / (float)1000;
         long KbRevieved = byteRecieved / 1000;
-        System.out.printf("Server recieved = %d KB rate = %.3f Mbps%n", KbRevieved, (float) KbRevieved / time);
+        System.out.printf("Server recieved = %d KB rate = %.3f Mbps%n", KbRevieved, (float) KbRevieved / (time*1000));
     }
 }
