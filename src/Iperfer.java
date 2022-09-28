@@ -1,7 +1,4 @@
-package guikai;
-
-
-public class Main {
+public class Iperfer {
 
     public static void main(String[] args) {
         // preliminary parameter check
