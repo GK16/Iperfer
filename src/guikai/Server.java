@@ -48,6 +48,6 @@ public class Server {
         }
         float time = (float) (endTime - startTime) / (float)1000;
         long KbRevieved = byteRecieved / 1000;
-        System.out.printf("Server recieved = %d KB rate = %.3f Mbps%n", KbRevieved, (float) KbRevieved / (time*1000));
+        System.out.printf("Server recieved = %d KB rate = %.3f Mbps%n", KbRevieved, (float) KbRevieved * 8 / (time*1000));
     }
 }
